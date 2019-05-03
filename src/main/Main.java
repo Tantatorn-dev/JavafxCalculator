@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -17,6 +18,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class Main extends Application {
+
+    Display display = new Display();
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -64,14 +67,9 @@ public class Main extends Application {
             i.setMinHeight(60);
         });
 
-        Text display = new Text();
-        display.setText("0");
-        display.setTextAlignment(TextAlignment.RIGHT);
-        display.setFont(Font.font(48));
-
         VBox vBox = new VBox();
         vBox.setSpacing(10);
-        vBox.setPadding(new Insets(0,140,0,0));
+        vBox.setPadding(new Insets(0,0,0,0));
         vBox.setAlignment(Pos.CENTER_RIGHT);
         vBox.getChildren().addAll(display,gridPane);
 
@@ -82,6 +80,17 @@ public class Main extends Application {
         primaryStage.show();
     }
 
+    class Display extends StackPane {
+        private Text display=new Text();
+        private String text;
+
+        public Display(){
+            text="0";
+            display.setText(text);
+            display.setFont(new Font(48));
+            getChildren().add(display);
+        }
+    }
 
     public static void main(String[] args) {
         launch(args);
