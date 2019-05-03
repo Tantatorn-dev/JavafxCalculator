@@ -7,8 +7,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
+import java.awt.*;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -59,10 +64,21 @@ public class Main extends Application {
             i.setMinHeight(60);
         });
 
-        borderPane.setCenter(gridPane);
+        Text display = new Text();
+        display.setText("0");
+        display.setTextAlignment(TextAlignment.RIGHT);
+        display.setFont(Font.font(48));
+
+        VBox vBox = new VBox();
+        vBox.setSpacing(10);
+        vBox.setPadding(new Insets(0,140,0,0));
+        vBox.setAlignment(Pos.CENTER_RIGHT);
+        vBox.getChildren().addAll(display,gridPane);
+
+        borderPane.setCenter(vBox);
 
         primaryStage.setTitle("JavaFX Calculator");
-        primaryStage.setScene(new Scene(borderPane, 800, 600));
+        primaryStage.setScene(new Scene(borderPane, 650, 400));
         primaryStage.show();
     }
 
