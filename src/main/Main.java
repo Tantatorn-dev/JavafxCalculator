@@ -2,9 +2,14 @@ package main;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -12,6 +17,44 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
         BorderPane borderPane = new BorderPane();
         borderPane.setPadding(new Insets(10,10,10,10));
+
+        GridPane gridPane = new GridPane();
+        gridPane.setHgap(10);
+        gridPane.setVgap(10);
+        gridPane.setAlignment(Pos.CENTER);
+
+        ArrayList<Button> buttons = new ArrayList<>();
+
+        buttons.add(new Button("1"));
+        buttons.add(new Button("2"));
+        buttons.add(new Button("3"));
+        buttons.add(new Button("4"));
+        buttons.add(new Button("5"));
+        buttons.add(new Button("6"));
+        buttons.add(new Button("7"));
+        buttons.add(new Button("8"));
+        buttons.add(new Button("9"));
+        buttons.add(new Button("+"));
+        buttons.add(new Button("-"));
+        buttons.add(new Button("*"));
+        buttons.add(new Button("/"));
+        buttons.add(new Button("."));
+        buttons.add(new Button("0"));
+        buttons.add(new Button("clear"));
+
+        for(int i=0;i<9;i++){
+            gridPane.add(buttons.get(i),i%3,i/3);
+        }
+
+        for(int i=0;i<4;i++){
+            gridPane.add(buttons.get(9+i),3,i);
+        }
+
+        for(int i=0;i<3;i++){
+            gridPane.add(buttons.get(13+i),i,3);
+        }
+
+        borderPane.setCenter(gridPane);
 
         primaryStage.setTitle("JavaFX Calculator");
         primaryStage.setScene(new Scene(borderPane, 800, 600));
