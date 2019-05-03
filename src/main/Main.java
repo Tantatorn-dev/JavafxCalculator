@@ -54,6 +54,11 @@ public class Main extends Application {
             gridPane.add(buttons.get(13+i),i,3);
         }
 
+        buttons.forEach((Button i) ->{
+            i.setMinWidth(150);
+            i.setMinHeight(60);
+        });
+
         borderPane.setCenter(gridPane);
 
         primaryStage.setTitle("JavaFX Calculator");
