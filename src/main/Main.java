@@ -1,18 +1,20 @@
-package sample;
+package main;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
-        primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        BorderPane borderPane = new BorderPane();
+        borderPane.setPadding(new Insets(10,10,10,10));
+
+        primaryStage.setTitle("JavaFX Calculator");
+        primaryStage.setScene(new Scene(borderPane, 800, 600));
         primaryStage.show();
     }
 
