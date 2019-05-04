@@ -11,10 +11,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 
-import java.awt.*;
+import javafx.event.ActionEvent;
+import java.beans.EventHandler;
 import java.util.ArrayList;
 
 public class Main extends Application {
@@ -51,7 +51,12 @@ public class Main extends Application {
         buttons.add(new Button("clear"));
 
         for(int i=0;i<9;i++){
+            final int m=i;
+
             gridPane.add(buttons.get(i),i%3,i/3);
+            buttons.get(i).setOnAction((event)-> {
+                display.setNumInput(Integer.toString(m));
+            });
         }
 
         for(int i=0;i<4;i++){
@@ -82,13 +87,18 @@ public class Main extends Application {
 
     class Display extends StackPane {
         private Text display=new Text();
-        private String text;
+        private StringBuilder text;
 
         public Display(){
-            text="0";
-            display.setText(text);
+            text=new StringBuilder("");
+            display.setText(text.toString());
             display.setFont(new Font(48));
             getChildren().add(display);
+        }
+
+        void setNumInput(String input){
+            text.append(input);
+            display.setText(text.toString());
         }
     }
 
