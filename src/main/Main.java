@@ -67,6 +67,10 @@ public class Main extends Application {
             gridPane.add(buttons.get(13+i),i,3);
         }
 
+        buttons.get(15).setOnAction((event)->{
+            display.clearInput();
+        });
+
         buttons.forEach((Button i) ->{
             i.setMinWidth(150);
             i.setMinHeight(60);
@@ -98,6 +102,11 @@ public class Main extends Application {
 
         void setNumInput(String input){
             text.append(input);
+            display.setText(text.toString());
+        }
+
+        void clearInput(){
+            text = new StringBuilder("");
             display.setText(text.toString());
         }
     }
