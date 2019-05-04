@@ -49,6 +49,7 @@ public class Main extends Application {
         buttons.add(new Button("."));
         buttons.add(new Button("0"));
         buttons.add(new Button("clear"));
+        buttons.add(new Button("="));
 
         for(int i=0;i<9;i++){
             final int m=i;
@@ -67,6 +68,10 @@ public class Main extends Application {
             gridPane.add(buttons.get(13+i),i,3);
         }
 
+        buttons.get(14).setOnAction((event)->{
+            display.setNumInput("0");
+        });
+
         buttons.get(15).setOnAction((event)->{
             display.clearInput();
         });
@@ -76,16 +81,18 @@ public class Main extends Application {
             i.setMinHeight(60);
         });
 
+        buttons.get(16).setMaxWidth(640);
+
         VBox vBox = new VBox();
         vBox.setSpacing(10);
         vBox.setPadding(new Insets(0,0,0,0));
         vBox.setAlignment(Pos.CENTER_RIGHT);
-        vBox.getChildren().addAll(display,gridPane);
+        vBox.getChildren().addAll(display,gridPane,buttons.get(16));
 
         borderPane.setCenter(vBox);
 
         primaryStage.setTitle("JavaFX Calculator");
-        primaryStage.setScene(new Scene(borderPane, 650, 400));
+        primaryStage.setScene(new Scene(borderPane, 650, 500));
         primaryStage.show();
     }
 
