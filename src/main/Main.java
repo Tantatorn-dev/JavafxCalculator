@@ -14,6 +14,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import javafx.event.ActionEvent;
+
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.beans.EventHandler;
 import java.util.ArrayList;
 
@@ -56,16 +60,23 @@ public class Main extends Application {
 
             gridPane.add(buttons.get(i),i%3,i/3);
             buttons.get(i).setOnAction((event)-> {
-                display.setNumInput(Integer.toString(m));
+                display.setNumInput(Integer.toString(m+1));
             });
         }
 
         for(int i=0;i<4;i++){
-            gridPane.add(buttons.get(9+i),3,i);
+            final int m = 9+i;
+            gridPane.add(buttons.get(m),3,i);
+            buttons.get(m).setOnAction(
+                    (event)->{
+                        display.setNumInput(buttons.get(m).getText());
+                    }
+            );
         }
 
         for(int i=0;i<3;i++){
-            gridPane.add(buttons.get(13+i),i,3);
+            final int m = i+13;
+            gridPane.add(buttons.get(m),i,3);
         }
 
         buttons.get(14).setOnAction((event)->{
@@ -75,6 +86,10 @@ public class Main extends Application {
         buttons.get(15).setOnAction((event)->{
             display.clearInput();
         });
+
+        buttons.get(16).setOnAction((event -> {
+            display.compute();
+        }));
 
         buttons.forEach((Button i) ->{
             i.setMinWidth(150);
@@ -107,6 +122,7 @@ public class Main extends Application {
             getChildren().add(display);
         }
 
+
         void setNumInput(String input){
             text.append(input);
             display.setText(text.toString());
@@ -114,6 +130,19 @@ public class Main extends Application {
 
         void clearInput(){
             text = new StringBuilder("");
+            display.setText(text.toString());
+        }
+
+        void compute() {
+            ScriptEngineManager manager = new ScriptEngineManager();
+            ScriptEngine engine = manager.getEngineByName("js");
+            Object result = null;
+            try {
+                result = engine.eval(text.toString());
+            } catch (ScriptException e) {
+                e.printStackTrace();
+            }
+            text=new StringBuilder(result.toString());
             display.setText(text.toString());
         }
     }
